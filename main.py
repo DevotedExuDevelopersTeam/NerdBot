@@ -52,7 +52,7 @@ async def on_message(msg: disnake.Message):
     if bot.user in msg.mentions:
         s = s.replace("you aren", "I ain").replace("you are", "I am").replace("yours", "mine").replace("you", "I")
         for mt in re.findall(f"<@!?{bot.user.id}>", s):
-            s = mt.replace(mt, "")
+            s = s.replace(mt, "")
     else:
         s = s.replace("you", "they")
     if is_modified:
