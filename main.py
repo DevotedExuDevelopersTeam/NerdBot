@@ -7,7 +7,14 @@ from disnake.ext import commands
 from exencolorlogs import Logger
 
 
-REPLACEMENTS = [("is", "isn't"), ("are", "aren't"), ("am", "ain't"), ("do", "don't"), ("does", "doesn't")]
+REPLACEMENTS = [
+    ("is", "isn't"),
+    ("are", "aren't"),
+    ("am", "ain't"),
+    ("do", "don't"),
+    ("does", "doesn't"),
+    ("was", "wasn't"),
+]
 
 
 class Bot(commands.Bot):
@@ -49,12 +56,14 @@ async def on_message(msg: disnake.Message):
         output.append(w)
 
     s = " ".join(output)
-    if bot.user in msg.mentions:
-        s = s.replace("you aren", "I ain").replace("you are", "I am").replace("yours", "mine").replace("you", "I")
-        for mt in re.findall(f"<@!?{bot.user.id}>", s):
-            s = s.replace(mt, "")
-    else:
-        s = s.replace("you", "they")
+    s = (
+        s.replace("you aren", "I ain")
+        .replace("you are", "I am")
+        .replace("yours", "mine")
+        .replace("you", "I")
+    )
+    for mt in re.findall(f"<@!?{bot.user.id}>", s):
+        s = s.replace(mt, "")
     if is_modified:
         await msg.reply(s)
 
