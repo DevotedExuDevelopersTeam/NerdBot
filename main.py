@@ -60,7 +60,7 @@ async def on_message(msg: disnake.Message):
         s.replace("you aren", "I ain")
         .replace("you are", "I am")
         .replace("yours", "mine")
-        .replace("you", "I")
+        .replace("you ", "I ")
     )
     for mt in re.findall(f"<@!?{bot.user.id}>", s):
         s = s.replace(mt, "")
