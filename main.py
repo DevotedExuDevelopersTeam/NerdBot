@@ -64,6 +64,7 @@ async def on_message(msg: disnake.Message):
     )
     for mt in re.findall(f"<@!?{bot.user.id}>", s):
         s = s.replace(mt, "")
+    s = s.replace("  ", " ")
     if is_modified:
         await msg.reply(s)
 
